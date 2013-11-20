@@ -15,6 +15,8 @@
 <link rel="stylesheet" media="screen" href="<c:url value='/resources/css/responsive.css' />">
 <link rel="stylesheet" media="screen" href="<c:url value='/resources/css/angular-growl.min.css' />">
 <link rel="shortcut icon" href="<c:url value='/resources/img/favicon.ico' />">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"> </script>
+<script type="text/javascript" src="<c:url value='/resources/js/vender/bootstrap.min.js'/>"></script>
 <script type="text/javascript">
 	(function(i, s, o, g, r, a, m) {
 		i['GoogleAnalyticsObject'] = r;

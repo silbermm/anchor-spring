@@ -64,6 +64,18 @@ public class HomeController {
         return m;
     }
     
+    @RequestMapping(value="location", method=RequestMethod.GET)
+    public String locationPage(Model model){
+    	model.addAttribute("activeLink", "location");
+    	return "location";
+    }
+    
+    @RequestMapping(value="about")
+    public String aboutPage(Model model) {
+    	model.addAttribute("activeLink", "about");
+    	return "about";
+    }
+    
     @RequestMapping(value = "menus", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody

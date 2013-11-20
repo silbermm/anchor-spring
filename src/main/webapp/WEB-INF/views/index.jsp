@@ -3,43 +3,104 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html ng-app="anchorotr" ng-controller="AppCtrl">
+<html>
 <head>
 	<title>The Anchor-OTR</title>
 	<meta name="fragment" content="!" />
 	<%@ include file="common/header.jsp" %>
 </head>
 <body>
-	<div growl></div>
 	
 	
-	<div id="desktop-menubar" class="row-fluid">
-		<%@ include file="common/navigation.jsp" %>
+	
+	<div id="desktop-menubar" class="row">
+		<%@ include file="common/logo.jsp" %>
+		<div class="container" id="main-menu">		
+			<%@ include file="common/navigation.jsp" %>
+			
+			
+			<div class="ui-view-row container" id="landing-imgs">
+				<div class="grid-sizer"></div>	
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/1.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/2.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/3.jpg' />" />
+				</div>
+				<div class="masonry-brick w2">
+					<img src="<c:url value='resources/img/landing/4.jpg' />" />
+				</div>
+				<div class="masonry-brick w2">
+					<img src="<c:url value='resources/img/landing/5.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/6.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/7.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/8.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/10.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/11.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/9.jpg' />" />
+				</div>
+				<div class="masonry-brick w2">
+					<img src="<c:url value='resources/img/landing/13.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/14.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/16.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/12.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/15.jpg' />" />
+				</div>
+				<div class="masonry-brick w2">
+					<img src="<c:url value='resources/img/landing/17.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/18.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/20.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/21.jpg' />" />
+				</div>
+				<div class="masonry-brick ">
+					<img src="<c:url value='resources/img/landing/19.jpg' />" />
+				</div>
+			</div>
+			
+			<!-- 
+			<div masonry class="ui-view-row container" ng-if="imagesLoaded" id="landing-imgs" 
+				masonry-options="{ columnWidth: container.querySelector('.grid-sizer'), transitionDuration: '0'}">
+				<div class="grid-sizer"></div>
+				<div masonry-brick class="masonry-brick {{img.className}}" ng-repeat="img in images">
+					<img ng-src="{{img.url}}" />
+				</div>
+			</div>
+			 -->
+			
+			<%@ include file="common/footer.jsp" %>
+		</div>
 	</div>
-	
-	
-	
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"> </script>    
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/imagesLoaded.js'/>"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/masonry.min.js'/>"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/angular.min.js'/>"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/angular-masonry.min.js'/>"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/bootstrap.min.js'/>"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/angular-growl.min.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/angulartics.min.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/angulartics-google-analytics.min.js' />"></script>
-	<script type="text/javascript" src="<c:url value='/resources/js/vender/ui-bootstrap-tpls-0.6.0.min.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/ui-route.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/ui-utils.min.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/app.js' />"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/services/titleService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/services/menuCollapseService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/services/navCollapseService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/services/authService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/home/home.js' />"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/about/about.js' />"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/location/location.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/menus/menus.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/reservation/reservation.js' />"></script>   
+		
+    <script type="text/javascript" src="<c:url value='/resources/js/vender/masonry.min.js'/>"></script>      
+    <script type="text/javascript" src="<c:url value='/resources/js/index.js' />"></script>             
 </body>
 </html>

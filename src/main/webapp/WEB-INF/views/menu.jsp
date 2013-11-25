@@ -12,19 +12,18 @@
 <body>
 	<div growl></div>
 	
-	<%@ include file="common/navigation.jsp" %>
+	<div id="desktop-menubar" class="row">
+		<%@ include file="common/logo.jsp" %>
+		<div class="container" id="main-menu">		
+			<%@ include file="common/navigation.jsp" %>
+			<div ui-view="main"></div>
+			<%@ include file="common/footer.jsp" %>
+		</div>
+	</div>
 	
-	
-	<div ui-view="main"></div>
-	<div ng-include="'/resources/js/partials/footer.tpl.html'"></div>
-	
-	
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"> </script>    
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/imagesLoaded.js'/>"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/masonry.min.js'/>"></script> 
+	<script type="text/javascript" src="<c:url value='/resources/js/menu.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/resources/js/vender/angular.min.js'/>"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/angular-masonry.min.js'/>"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/vender/bootstrap.min.js'/>"></script>        
+    <script type="text/javascript" src="<c:url value='/resources/js/vender/angular-masonry.min.js'/>"></script>                
     <script type="text/javascript" src="<c:url value='/resources/js/vender/angular-growl.min.js' />"></script>
     <script type="text/javascript" src="<c:url value='/resources/js/vender/angulartics.min.js' />"></script>
     <script type="text/javascript" src="<c:url value='/resources/js/vender/angulartics-google-analytics.min.js' />"></script>

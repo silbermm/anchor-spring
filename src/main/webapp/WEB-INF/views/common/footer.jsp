@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="pagefooter" class="row ui-view" style="padding-bottom:20px">                   
     <div class="thin-line" > </div>
     <div class="thick-line"> </div>	
@@ -20,24 +23,30 @@
                 <i class="icon-envelope icon-light"></i>
             </span>	
         </a>
-        <a href="/login" n ng-if="!isAuthenticated">
+        <sec:authorize access="!isAuthenticated()">
+        <a href="/login" ng-if="!isAuthenticated">
             <span class="icon-stack">
                 <i class="icon-circle icon-stack-base"></i>
                 <i class="icon-lock icon-light"></i>
             </span>
         </a>
+        </sec:authorize>
+        <sec:authorize access="hasRole('Administrator')">
         <a href="/settings" ng-if="isAuthenticated">
             <span class="icon-stack">
                 <i class="icon-circle icon-stack-base"></i>
                 <i class="icon-gears icon-light"></i>
             </span>
         </a>
+        </sec:authorize>
+        <sec:authorize access="hasRole('Administrator')">
         <a href="/j_spring_security_logout" ng-if="isAuthenticated">
             <span class="icon-stack">
                 <i class="icon-circle icon-stack-base"></i>
                 <i class="icon-unlock icon-light"></i>
             </span>
         </a>
+        </sec:authorize>
     </div>
 </div>
 

@@ -9,16 +9,11 @@
 	<meta name="fragment" content="!" />
 	<%@ include file="common/header.jsp" %>
 </head>
-<body>
-	
-	
-	
+<body>		
 	<div id="desktop-menubar" class="row">
 		<%@ include file="common/logo.jsp" %>
 		<div class="container" id="main-menu">		
-			<%@ include file="common/navigation.jsp" %>
-			
-			
+			<%@ include file="common/navigation.jsp" %>				
 			<div class="ui-view-row container" id="landing-imgs">
 				<div class="grid-sizer"></div>	
 				<div class="masonry-brick ">
@@ -85,17 +80,7 @@
 					<img src="<c:url value='resources/img/landing/19.jpg' />" />
 				</div>
 			</div>
-			
-			<!-- 
-			<div masonry class="ui-view-row container" ng-if="imagesLoaded" id="landing-imgs" 
-				masonry-options="{ columnWidth: container.querySelector('.grid-sizer'), transitionDuration: '0'}">
-				<div class="grid-sizer"></div>
-				<div masonry-brick class="masonry-brick {{img.className}}" ng-repeat="img in images">
-					<img ng-src="{{img.url}}" />
-				</div>
-			</div>
-			 -->
-			
+									
 			<%@ include file="common/footer.jsp" %>
 		</div>
 	</div>

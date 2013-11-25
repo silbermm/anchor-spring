@@ -4,25 +4,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>The Anchor-OTR Administration Settings </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" media="screen" href="<c:url value='/resources/css/responsive.css' />">
-        <link rel="shortcut icon" type="image/png" href="<c:url value='img/favicon.png' />">
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/vender/bootstrap.min.js'/>"></script>         
+    	<title> Mail Settings | The Anchor-OTR </title>
+       <meta name="fragment" content="!" />
+		<%@ include file="../common/header.jsp" %>     
     </head>
     <body>
-        <div id="mobile-logo">
-            <div class="row-fluid">
-                <div class="span12 text-center">		
-                    <a href="/"> <img src="/resources/img/AnchorLarge.png" /> </a>
-                </div>
-            </div>
-        </div>
-    <body>
+    
+    <div id="desktop-menubar" class="row">
+		<%@ include file="../common/logo.jsp" %>
+		<div class="container" id="main-menu">		
+			<%@ include file="../common/navigation.jsp" %>
+       
         <section>
             <div class="container login">
                 <div class="row ">
@@ -150,5 +142,11 @@
                 </div>
             </div>
         </section>
+        
+        
+			<%@ include file="../common/footer.jsp" %>
+		</div>
+	</div>
+        
     </body>
 </html>

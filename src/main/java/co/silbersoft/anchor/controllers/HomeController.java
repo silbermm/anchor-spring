@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.MailException;
@@ -22,6 +24,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +56,22 @@ public class HomeController {
             model.addAttribute("error", "true");
         }
         return "login";
+    }
+    
+    @RequestMapping(value="menu", method=RequestMethod.GET)
+    public String menu(Model model) {
+    	model.addAttribute("activeLink", "menu");
+    	return "menu";
+    }
+    
+    @RequestMapping(value="reservations", method=RequestMethod.GET)
+    public String reservations(Device device, Model model) {
+    	model.addAttribute("activeLink", "reservations");
+    	if(device.isNormal()) {
+    		return "reservations";
+    	} else {
+    		return "mobile/reservations";
+    	}
     }
 
     @RequestMapping(value="mail", method=RequestMethod.POST)
@@ -102,35 +121,7 @@ public class HomeController {
     public @ResponseBody
     List<String> getCatagories(@PathVariable Long id) {
         return menuService.getCatagoriesForMenu(id);
-    }
-
-    @RequestMapping(value = "landing/imgs", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<FrontPageImage> getImages(Device device, HttpServletRequest request) {    	
-    	List<FrontPageImage> imgList = new ArrayList<FrontPageImage>();
-    	imgList.add(new FrontPageImage("resources/img/landing/1.jpg", null, 1 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/2.jpg", null, 2 ));    	
-    	imgList.add(new FrontPageImage("resources/img/landing/3.jpg", null, 3 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/4.jpg", "w2", 4 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/5.jpg", "w2", 5 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/6.jpg", null, 6 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/7.jpg", null, 7 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/8.jpg", null, 8 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/10.jpg", null, 9 ));    	
-    	imgList.add(new FrontPageImage("resources/img/landing/11.jpg", null, 10 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/9.jpg", null, 11 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/13.jpg", "w2", 12 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/14.jpg", null, 13 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/16.jpg", null, 14 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/12.jpg", null, 15));
-    	imgList.add(new FrontPageImage("resources/img/landing/15.jpg", null, 16 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/17.jpg", "w2", 17 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/18.jpg", null, 18 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/20.jpg", null, 19 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/21.jpg", null, 20 ));
-    	imgList.add(new FrontPageImage("resources/img/landing/19.jpg", null, 21 ));    	
-    	return imgList;
-    }
+    }  
     
     @PreAuthorize("hasRole('Administrator')")
     @RequestMapping(value = "menus/items/{id}", method = RequestMethod.DELETE)

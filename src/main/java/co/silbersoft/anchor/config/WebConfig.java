@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ImportResource(value = { "/WEB-INF/spring-security.xml" })
+@ImportResource(value = { "classpath:/spring-security.xml" })
 @ComponentScan(basePackages = { "co.silbersoft.anchor.controllers" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 

@@ -1,12 +1,10 @@
 'use strict';
 angular.module('anchorotr.menus', [
     'ui.state',
-    'titleService',
-    'menuCollapseService',
+    'titleService',   
     'authService',
     'angular-growl',
     'ui.bootstrap',
-    'navCollapseService',
 ]).config(function config($stateProvider, $urlRouterProvider) {
     $stateProvider.state('menus', {
         url: '/menus/:id',
@@ -25,10 +23,8 @@ angular.module('anchorotr.menus', [
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
-}).controller('MenuCtrl', function MenuController($scope, titleService, menuCollapseService, navCollapseService, authService, $stateParams, $modal, $http, $log, growl) {
-    navCollapseService.setCollapsed(true);
-    menuCollapseService.setCollapsed(false);
-    
+}).controller('MenuCtrl', function MenuController($scope, titleService, authService, $stateParams, $modal, $http, $log, growl) {
+
     $scope.openAddModal = function(currentCatagory) {
         var modalInstance = $modal.open({
             templateUrl: 'addModal.html',

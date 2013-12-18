@@ -1,6 +1,7 @@
 package co.silbersoft.anchor.controllers;
 
 import co.silbersoft.anchor.exceptions.GenericDataException;
+import co.silbersoft.anchor.forms.MailForm;
 import co.silbersoft.anchor.models.FrontPageImage;
 import co.silbersoft.anchor.models.Mail;
 import co.silbersoft.anchor.models.Menu;
@@ -8,14 +9,23 @@ import co.silbersoft.anchor.models.MenuItem;
 import co.silbersoft.anchor.services.MailService;
 import co.silbersoft.anchor.services.MenuService;
 
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javassist.expr.NewArray;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import net.tanesha.recaptcha.ReCaptcha;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.MailException;
 import org.springframework.mobile.device.Device;
@@ -24,8 +34,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +51,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 @RequestMapping(value = "/")
 public class HomeController {
+	
+	@InitBinder
+    protected void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(@RequestParam(value = "_escaped_fragment_", required = false) String pageToIndex, Device device, Model model) {
@@ -58,10 +78,59 @@ public class HomeController {
         return "login";
     }
     
+    public String thanks(Model model) {
+    	return "thanks";
+    }
+    
     @RequestMapping(value="menu", method=RequestMethod.GET)
     public String menu(Model model) {
     	model.addAttribute("activeLink", "menu");
     	return "menu";
+    }
+    
+    @RequestMapping(value="mail", method=RequestMethod.GET)
+    public String mail(Model model) {
+    	model.addAttribute("activeLink", "mail");
+    	model.addAttribute("mailForm", new MailForm());
+    	return "mail";
+    }
+    
+    @RequestMapping(value="mail", method=RequestMethod.POST)
+    public String mailPost(@Valid @ModelAttribute("mailForm")  MailForm mailForm, 
+    	@RequestParam(value="recaptcha_challenge_field", required=false) String challengeField, 
+    	@RequestParam(value="recaptcha_response_field", required=false) String responseField,
+    	BindingResult result,
+    	HttpServletRequest servletRequest) {	
+    	
+    	if(result.hasErrors())
+    		return "mail";
+    	
+    	log.error("checking recaptcha!");    	
+    	if(responseField == null) {
+    		log.debug("responseField is null");
+    		result.rejectValue("recapthca", "recaptcha.error");
+    		return "mail";
+    	}
+    	log.debug("responseField is not null");
+    	mailService.checkRecaptcha(challengeField, responseField, servletRequest.getRemoteAddr(), result);
+    	if(result.hasErrors()) {
+    		log.error("there are errors in the form... returning mail");
+    		return "mail";
+    	} else {
+    		log.error("currently no errors... trying to send mail");
+    		mailService.sendMessage(mailForm.getFrom(), mailForm.getMessage(), result);    		
+    		if(result.hasErrors()) {
+    			log.error("there are errors in the form... returning mail");
+    			return "mail";
+    		} else {
+    			return "redirect:thanks";
+    		}
+    	}
+    	
+    }
+    
+    public String thanks() {
+    	return "thanks";
     }
     
     @RequestMapping(value="reservations", method=RequestMethod.GET)
@@ -74,6 +143,7 @@ public class HomeController {
     	}
     }
 
+    /*
     @RequestMapping(value="mail", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody Map<String,String> sendMail(@RequestBody Mail mail){     	    
@@ -82,6 +152,7 @@ public class HomeController {
         m.put("sent", "true");
         return m;
     }
+    */
     
     @RequestMapping(value="location", method=RequestMethod.GET)
     public String locationPage(Model model){
@@ -155,13 +226,18 @@ public class HomeController {
         status.put("updated", menuItem.getId());
         return status;
     }
-
+    
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public String handleBindException(BindException e) {
+    	return "mail";
+    }
+    
     @ExceptionHandler(MailException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public @ResponseBody Map<String, String> handleMailException(MailException e){
-        Map error = new HashMap();
-        error.put("error", e.getMessage());
-        return error;
+    @ResponseStatus(HttpStatus.OK)
+    public String handleMailException(MailException e){
+    	log.error("Handling Mail exception!");
+        return "mail";
     }
     
     @ExceptionHandler(GenericDataException.class)
@@ -172,16 +248,19 @@ public class HomeController {
         error.put("error", e.getMessage());
         return error;
     }
-
+       
+    /*
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody
     Map<String, String> handleException(Exception e) {
         Map<String, String> error = new HashMap();
-        error.put("error", e.getMessage());
+        error.put("error", e.getClass().getCanonicalName());
         return error;
-    }    
-    
+    }
+    */       
+
+    private Logger log = LoggerFactory.getLogger(HomeController.class);
     @Autowired MenuService menuService;    
     @Autowired MailService mailService;
 }

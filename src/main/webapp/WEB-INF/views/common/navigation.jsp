@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 								
 		
-			<div class="row-fluid visible-desktop hidden-phone hidden-tablet">
+			<div class="row-fluid visible-desktop hidden-phone hidden-tablet menubar">
 				<div class="container">
 					<div class="span4">
 						<ul class="inline text-right">
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid visible-phone visible-tablet hidden-desktop">
+			<div class="row-fluid visible-phone visible-tablet hidden-desktop menubar">
 				<div class="container">
 					<div class="span12" style="height:60px">
 						<ul class="inline text-center thin">

@@ -1,20 +1,18 @@
 package co.silbersoft.anchor.config;
 
-import co.silbersoft.anchor.dao.MailSettingsDao;
-import co.silbersoft.anchor.models.MailSettings;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Properties;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
+
 import javax.sql.DataSource;
+
+import net.tanesha.recaptcha.ReCaptcha;
+import net.tanesha.recaptcha.ReCaptchaImpl;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +22,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 @Configuration
 @EnableWebMvc
@@ -85,7 +86,14 @@ public class AppContext {
     public SimpleMailMessage mailMessage() {
         SimpleMailMessage m = new SimpleMailMessage();        
         return m;
-    }       
+    } 
+    	
+    @Bean 
+    public ReCaptcha recaptcha() {
+    	ReCaptchaImpl r = new ReCaptchaImpl();
+    	r.setPrivateKey("6Lf4aukSAAAAAFHN6BLspI5ui6LwlWUIMVF8QMUp");
+		return r;
+    }
 
     private Properties getHibernateProperties() {
         Properties p = new Properties();

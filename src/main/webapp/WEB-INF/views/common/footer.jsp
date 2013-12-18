@@ -17,7 +17,7 @@
                 <i class="icon-twitter icon-light"></i>
             </span>	
         </a>
-        <a ng-click="openMailModal()"> 
+        <a data-toggle="modal"data-target="#mailModal"> 
             <span class="icon-stack">
                 <i class="icon-circle icon-stack-base"></i>
                 <i class="icon-envelope icon-light"></i>
@@ -50,44 +50,36 @@
     </div>
 </div>
 
-<script type="text/ng-template" id="mailModal.html">
-    <div class="modal-header">
-    <h3>Contact Us</h3>
-    </div>
+
+<!-- Modal -->
+<div id="mailModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mailModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="mailModalLabel">Contact Us</h3>
+  </div>
+  <div class="modal-body">
     <div class="modal-body">
     <p> We love hearing from our customers! Send us an email at info@theanchor-otr.com or simply fill out the form below. </p>
     <br />
-    <hr>
-
-    <form name="form" class="form-horizontal css-form"> 
-    <div class="control-group">
-    <label class="control-label" for="from">Your Email (optional): </label>
-    <div class="controls">
-    <input type="text" id="from" placeholder="From" ng-model="mail.from">
-    </div>
-    </div>
-    <div class="control-group">
-    <label class="control-label" for="message">Message</label>
-    <div class="controls">
-    <textarea rows='10' id="message" placeholder="Your Message..." ng-model="mail.message" required></textarea>                    
-    </div>
-    </div>        
-    </form>                       
-
-    </div>
-    <div class="modal-footer">
-    <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>                        
-</script>
-<script type="text/ng-template" id="mailThanksModal.html">
-    <div class="modal-header">
-    <h3>Thank You!</h3>
-    </div>
-    <div class="modal-body">
-    <p> Your email has been sent. Thank you for your feedback and questions! </p>                 
-    </div>
-    <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="cancel()">Close</button>      
-    </div>                        
-</script>
+    <hr>    
+      <form name="form" class="form-horizontal css-form"> 
+    	<div class="control-group">
+    		<label class="control-label" for="from">Your Email (optional): </label>
+    		<div class="controls">
+    			<input type="text" id="from" placeholder="From" ng-model="mail.from">
+    		</div>
+    	</div>
+    	<div class="control-group">
+    		<label class="control-label" for="message">Message</label>
+    		<div class="controls">
+    			<textarea rows='10' id="message" placeholder="Your Message..." ng-model="mail.message" required></textarea>                    
+    		</div>
+    	</div>        
+  	</form>      
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Send</button>
+  </div>
+</div>
+</div>

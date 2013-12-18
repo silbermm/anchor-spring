@@ -36,12 +36,12 @@
                             <div class="tab-pane active" id="mail">
                                 <p>
                                     <form:form action="/settings/mail" modelAttribute="mailSettings" >                                    
-                                        <form:errors path="*"> 
-                                        <div class="alert alert-error">
-                                            <a class="close" data-dismiss="alert" href="#">×</a>
-                                            Please fix the errors below
-                                        </div>
-                                    </form:errors>
+                                    	<form:errors path="*"> 
+                                        	<div class="alert alert-error">
+                                            	<a class="close" data-dismiss="alert" href="#">×</a>
+                                            		Please fix the errors below
+                                        	</div>
+                                    	</form:errors>
 
                                     <div class="control-group">
                                         <label class="control-label" for="smtpHost"> SMTP Host </label>
@@ -68,7 +68,9 @@
                                             <label class="checkbox">
                                                 StartTLS <form:checkbox id="starttls" path="starttls" cssErrorClass="error"/>
                                                 <form:errors path="starttls">
-                                                    <span class="help-inline error"><form:errors path="starttls" htmlEscape="false" /></span>
+                                                    <span class="help-inline error">
+                                                    	<form:errors path="starttls" htmlEscape="false" />
+                                                    </span>
                                                 </form:errors>
                                             </label>
                                         </div>

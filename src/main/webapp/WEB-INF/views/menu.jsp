@@ -31,14 +31,8 @@
     <script type="text/javascript" src="<c:url value='/resources/js/vender/ui-route.js' />"></script>
     <script type="text/javascript" src="<c:url value='/resources/js/vender/ui-utils.min.js' />"></script>
     <script type="text/javascript" src="<c:url value='/resources/js/app.js' />"></script>        
-    <script type="text/javascript" src="<c:url value='/resources/js/services/titleService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/services/menuCollapseService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/services/navCollapseService.js' />"></script>
+    <script type="text/javascript" src="<c:url value='/resources/js/services/titleService.js' />"></script>    
     <script type="text/javascript" src="<c:url value='/resources/js/services/authService.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/home/home.js' />"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/about/about.js' />"></script> 
-    <script type="text/javascript" src="<c:url value='/resources/js/location/location.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/menus/menus.js' />"></script>
-    <script type="text/javascript" src="<c:url value='/resources/js/reservation/reservation.js' />"></script> 
+    <script type="text/javascript" src="<c:url value='/resources/js/menus/menus.js' />"></script>     
 </body>
 </html>

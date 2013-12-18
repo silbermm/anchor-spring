@@ -27,7 +27,7 @@ public class TestMailSender {
      public void testSendMail(){
          try {
             log.info("Trying to send mail message...");
-            mailService.sendMessage("silbermm@gmail.com", "Testing");
+            mailService.sendMessage("silbermm@gmail.com", "Testing", null);
          } catch(MailException e){
              Assert.fail();
          }

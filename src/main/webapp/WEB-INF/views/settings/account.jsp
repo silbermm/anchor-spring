@@ -35,7 +35,7 @@
                                             <a class="close" data-dismiss="alert" href="#">×</a>
                                             ${mesg}
                                         </div>
-                                    </c:if>
+                                    	</c:if>
                                     <form:errors path="*"> 
                                         <div class="alert alert-error">
                                             <a class="close" data-dismiss="alert" href="#">×</a>

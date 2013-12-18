@@ -98,6 +98,7 @@ public class SettingsController {
         error.put("error", me.getMessage());
         return error;
     }
+    
     private Logger log = LoggerFactory.getLogger(SettingsController.class);
     @Autowired
     MailService mailService;
